@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.main{
+    width: fit-content;
+    height: fit-content;
+}
+.linkContainer{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: maroon;
+    width: 100vw;
+    height: 10vh;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+.linkItem{
+    list-style: none;
+}
+.link{
+    text-decoration: none;
+    color: white;
+}
+
+.mobileNav{
+    display: none;
+    width: 100vw;
+    background-color: maroon;
+}
+/* .menuBtn{
+    color: white;
+    background-color: maroon;
+} */
+@media(max-width:768px){
+    .main{
+        display: none ;
+    }
+    .mobileNav{
+        display: block;
+    }
+}
