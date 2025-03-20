@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+
 const Contact = () => {
   const [user, setUser] = useState({
     name: '',
@@ -21,8 +22,9 @@ const Contact = () => {
   }
   const handlesubmit = async (e) => {
     e.preventDefault();
+    const apiUrl = import.meta.env.VITE_API_URL
     try {
-      const res = await axios.post(`http://localhost:4000/send`, user);
+      const res = await axios.post(apiUrl, user);
       alert("thanks for connecting")
       navigate('/');
     }
