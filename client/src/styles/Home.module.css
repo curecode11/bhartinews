@@ -47,13 +47,23 @@ body{
 .hotTopic{
     display: flex;
     justify-content: space-evenly;
-
+    flex-wrap: wrap;
 }
 .brand{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     color: maroon;
+}
+.brandText{
+    width: 40%;
+    height: 8vh;
+    border-radius: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 0px 4px;
+    font-size: 3vh;
+    font-weight: bold ;
+    transition: box-shadow 1s ease;
 }
 .brandImage{
     width: 150px;
@@ -135,4 +145,20 @@ marquee{
     .likeNewsImage{
         width: 25vw;
     }
+}
+@media(max-width:768px){
+    .brandName{
+        display: none;
+    }
+    .brandText{
+        width: 50vw;
+        height: 5vh;
+    }
+}
+.brandText::spelling-error{
+    background: red;
+}
+
+.brandText:focus{
+    box-shadow: 5px 5px 10px black;
 }

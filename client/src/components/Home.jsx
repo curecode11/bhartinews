@@ -11,7 +11,7 @@ const Home = () => {
   useEffect(() => {
     try{
       const getdata=async()=>{
-        const dataTopNews=await axios.get(`https://api.spaceflightnewsapi.net/v4/blogs/?limit=3`)
+        const dataTopNews=await axios.get(`https://api.spaceflightnewsapi.net/v4/blogs/?limit=10`)
         setTopNews(dataTopNews.data.results)
         console.log(dataTopNews.data.results);
       }
@@ -29,7 +29,8 @@ const Home = () => {
         <div className={styles.main}>
           <div className={styles.brand}>
             <img className={styles.brandImage} src="bharatiNews.png" alt="" />
-            <h1 className={styles.brandName}>Bharati News</h1>
+            <input type="text" placeholder='search🔍' className={styles.brandText}/>
+            <h1 className={styles.brandName}>BHARATI NEWS</h1>
           </div>
           <marquee behavior="" direction="">Latest News at your fingertips</marquee>
           <div className={styles.content}>
