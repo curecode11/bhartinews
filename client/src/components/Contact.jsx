@@ -22,7 +22,7 @@ const Contact = () => {
   }
   const handlesubmit = async (e) => {
     e.preventDefault();
-    const apiUrl = import.meta.env.VITE_API_URL
+    const apiUrl = import.meta.env.VITE_CONTACT_URL
     try {
       const res = await axios.post(apiUrl, user);
       alert("thanks for connecting")
