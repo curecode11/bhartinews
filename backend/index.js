@@ -8,7 +8,7 @@ import nodemailer from 'nodemailer'
 const app=express()
 
 app.use(cors({
-    origin: 'https://bhartinews-git-main-ronak-bhowmiks-projects.vercel.app',  // Frontend URL
+    origin: 'https://bhartinews.vercel.app/',  // Frontend URL
     methods: ['POST', 'GET'],
     credentials: true
 }));
