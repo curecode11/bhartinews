@@ -1,83 +1,199 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Navbar from './Navbar'
 import styles from '../styles/Home.module.css'
 import axios from 'axios'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Footer from './Footer'
+import Section from './Section'
+import SearchBar from './SearchBar'
+import RightSection from './RightSection'
+import PlaylistMarquee from './PlaylistMarquee'
+import AutoPlaylistSlider from './AutoPlaylistSlider'
 const Home = () => {
-  const [topNews,setTopNews]=useState([]);
+  const [videos, setVideos] = useState([]);
+  const [topNews, setTopNews] = useState([]);
+  const [breakingNews, setBreakingNews] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [menuItems, setMenuItems] = useState([]);
+  const API_KEY = import.meta.env.VITE_YT_API_KEY;
+  const CHANNEL_ID = import.meta.env.VITE_YT_CHANNEL_ID;
 
   useEffect(() => {
-    try{
-      const getdata=async()=>{
-        const dataTopNews=await axios.get(`https://api.spaceflightnewsapi.net/v4/blogs/?limit=10`)
-        setTopNews(dataTopNews.data.results)
-        console.log(dataTopNews.data.results);
+    try {
+      const getdata = async () => {
+        const dataTopNews = await axios.get(`http://localhost:1337/api/articles?populate=*&sort=createdAt:desc`)
+        // console.log(dataTopNews.data.data)
+        setTopNews(dataTopNews.data.data)
+        // console.log(topNews[0]);
       }
+      const getVideos = async () => {
+        const response = await axios.get(
+          `https://www.googleapis.com/youtube/v3/search?key=AIzaSyA7XkcTlvVIu226DNGPH5yreH86fPTENQM&channelId=UCuOPY-98JUY9T2igRpj8tIQ&part=snippet,id&order=date&maxResults=10`
+        );
+        // console.log(response.data);
+        setVideos(response.data.items);
+      }
+      const getCategories = async () => {
+        const response = await axios.get('http://localhost:1337/api/categories?populate=*&sort=createdAt:desc')
+        // console.log(response.data.data)
+        setCategories(response.data.data)
+      }
+      const getNews = async () => {
+        const breaking = await axios.get('http://localhost:1337/api/breakingstories?populate=*&sort=createdAt:desc')
+        setBreakingNews(breaking.data.data)
+        console.log(breaking.data.data[0])
+      }
+      // const getMenu = async () => {
+      //   const response = await axios.get('http://localhost:1337/api/leftmenus?populate=*')
+      //   // console.log(response.data.data)
+      //   setMenuItems(response.data.data);
+      // }
       getdata();
+      // getVideos(); 
+      getNews();
+      getCategories();
+      // getMenu();
     }
-    catch(error){
-      console.error("error fetching projects",error); 
+    catch (error) {
+      console.error("error fetching projects", error);
     }
-    
-  },[])
-  
+
+  }, [])
+
+
   return (
     <>
-        <Navbar/>
-        <div className={styles.main}>
-          <div className={styles.brand}>
-            <img className={styles.brandImage} src="bharatiNews.png" alt="" />
-            <input type="text" placeholder='search🔍' className={styles.brandText}/>
-            <h1 className={styles.brandName}>BHARATI NEWS</h1>
-          </div>
-          <marquee behavior="" direction="">Latest News at your fingertips</marquee>
-          <div className={styles.content}>
+      <div className={styles.main}>
+        <Navbar />
+        <div className={styles.breaking}>
+          <div className={styles.breakingDesc}>Breaking News</div>
+          <marquee className={styles.breakingSection} behavior="" direction="" >
+            <div className={styles.breakingContainer}>
+              {
+                breakingNews.map((news) => (
+                  <div key={news.id} className={styles.breakingNews}>
+                    <p>{
+                      news.title[0].children[0].text}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </marquee>
+        </div>
 
+        <div className={styles.content}>
           <div className={styles.left}>
-            <ul className={styles.leftLinks}>
-              <li className={styles.link}>North</li>
-              <li className={styles.link}>East</li>
-              <li className={styles.link}>West</li>
-              <li className={styles.link}>South</li>
-            </ul>
+            <PlaylistMarquee />
           </div>
           <div className={styles.mid}>
+            <SearchBar />
             <div className={styles.hotTopic}>
-              <li className={styles.hotLink}>Delhi Election</li>
-              <li className={styles.hotLink}>MahaKumbh</li>
-              <li className={styles.hotLink}>Insurgency</li>
-              <li className={styles.hotLink}>Bangladesh Crisis</li>
+              {/* <li className={styles.hotLink}>Delhi Election</li>
+              <li className={styles.hotLink}>MahaKumbh</li> */}
+              {
+                categories.map((item) => (
+                  <div key={item.id}>
+                    <Link className={styles.Link} to={`/categories/${item.slug}`}><li className={styles.hotLink}>{item.name}</li></Link>
+                  </div>
+                ))
+              }
             </div>
+            <div className={styles.carousel}>
+              <div id="carouselExample" className="carousel slide">
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider1.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                  <div className="carousel-item active">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider2.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                  <div className="carousel-item">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider3.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                  <div className="carousel-item">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider4.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                  <div className="carousel-item">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider5.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                  <div className="carousel-item">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider6.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                  <div className="carousel-item">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider7.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                  <div className="carousel-item">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider8.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                  <div className="carousel-item">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider9.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                  <div className="carousel-item">
+                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider10.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  </div>
+                </div>
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                  <span className="carousel-control-prev-icon" aria-hidden="true" />
+                  <span className="visually-hidden">Previous</span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                  <span className="carousel-control-next-icon" aria-hidden="true" />
+                  <span className="visually-hidden">Next</span>
+                </button>
+              </div>
+
+            </div>
+
             <ul className={styles.midLinks}>
               {
-                topNews.map((top)=>(
+                topNews.slice(0, 2).map((top) => (  // ← show only first two news items
                   <div className={styles.newsBox} key={top.id}>
                     <h3 className={styles.newsHeadline}>{top.title}</h3>
-                    <img className={styles.newsImage} src={top.image_url} alt="sdf" />
-                    <p>{top.summary}</p>
+                    <img className={styles.newsImage} src={`http://localhost:1337${top.media[0].formats.large.url}`} alt="sdf" />
+                    <div className={styles.likeAndMore}>
+                      <Link to={`/${top.slug}`} className={styles.readMore}>Read more</Link>
+                    </div>
                   </div>
                 ))
               }
             </ul>
+            <Link to='latest'><center>Load More</center></Link>
           </div>
           <div className={styles.right}>
-            <ul className={styles.rightLinks}>
-              <center><b>You might like</b></center>
-              {topNews.map((likeNews)=>(
-                <div className={styles.likeNewsBox} key={likeNews.id}>
-                  <img className={styles.likeNewsImage} src={likeNews.image_url} alt="" />
-                  <a className={styles.likeNewsLink} href={likeNews.url}><p className={styles.likeNewsTitle}>{likeNews.title}</p></a>
-
-                </div>
-              ))
-              }
-            </ul>
-          </div>
+            <RightSection />
+            {/* {
+                videos.map((video) => (
+                  <div key={video.id.videoId} className={styles.likeNewsBox}>
+                    <a
+                    className={styles.likeNewsLink}
+                      href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      >
+                      <img
+                      src={video.snippet.thumbnails.high.url}
+                      alt={video.snippet.title}
+                      className={styles.likeNewsImage}
+                      />
+                      <div className={styles.likeNewsTitle}>
+                        <h2 className={styles.likeNewsTitle}>{video.snippet.title}</h2>
+                      </div>
+                    </a>
+                  </div>
+                ))
+              } */}
+            {/* </ul> */}
           </div>
         </div>
-        <Footer/>
+      </div >
+
+      <center>
+        <AutoPlaylistSlider />
+      </center>
+      <Section />
+      <Footer />
     </>
   )
 }

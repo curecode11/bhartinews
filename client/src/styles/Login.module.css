@@ -1,120 +1,52 @@
-/* Container */
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #f4f4f4;
-  }
-  
-  /* Form Styling */
-  .form {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-    width: 100%;
-    max-width: 450px;
-    text-align: center;
-    transition: 0.3s;
-  }
-  
-  .form:hover {
-    box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
-  }
-  
-  /* Heading */
-  .form h2 {
-    color: maroon;
-    margin-bottom: 20px;
-  }
-  
-  /* Input Group */
-  .inputGroup {
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  .inputGroup label {
-    display: block;
-    color: #333;
-    margin-bottom: 5px;
-    font-weight: 600;
-  }
-  
-  .inputGroup input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: 0.3s;
-  }
-  
-  .inputGroup input:focus {
-    outline: none;
-    border-color: maroon;
-    box-shadow: 0 0 5px rgba(128, 0, 0, 0.6);
-  }
-  
-  /* Options (Remember Me + Forgot Password) */
-  .options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-  
-  .options label {
-    cursor: pointer;
-  }
-  
-  .forgot {
-    color: maroon;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-  
-  .forgot:hover {
-    text-decoration: underline;
-  }
-  
-  /* Error Message */
-  .error {
-    color: red;
-    font-size: 14px;
-    margin-bottom: 15px;
-  }
-  
-  /* Button */
-  .button {
-    width: 100%;
-    padding: 12px;
-    background: maroon;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-  
-  .button:hover {
-    background: #800000;
-  }
-  
-  /* Sign Up Link */
-  .signup {
-    margin-top: 15px;
-    font-size: 14px;
-  }
-  
-  .signup a {
-    color: maroon;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-  
-  .signup a:hover {
-    text-decoration: underline;
-  }
-  
+  max-width: 400px;
+  margin: 80px auto;
+  padding: 30px;
+  background-color: var(--primary-bg-color);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.button {
+  padding: 12px;
+  background-color: maroon;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
+}
+
+.button:hover {
+  background-color: red;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+.success {
+  color: green;
+  text-align: center;
+}

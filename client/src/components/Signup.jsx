@@ -1,112 +1,74 @@
-import { useState } from "react";
-import axios from "axios";
-import styles from "../styles/Signup.module.css";
-import Navbar from "./Navbar"
-import { useNavigate } from "react-router-dom";
-
+import React, { useState } from 'react';
+import axios from 'axios';
+import styles from '../styles/Signup.module.css';
+import Navbar from '../components/Navbar'
+import { Link } from 'react-router-dom';
 const Signup = () => {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    username: '',
+    email: '',
+    password: ''
   });
 
-  const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
-  const navigate = useNavigate();
+  const [message, setMessage] = useState('');
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match");
-      return;
-    }
-
     try {
-      const res = await axios.post("http://localhost:4000/api/signup", formData);
-      if (res.data.success) {
-        setSuccess("Account created successfully!");
-        setTimeout(() => navigate("/login"), 2000);
-      } else {
-        setError(res.data.message || "Signup failed. Try again.");
-      }
+      const res = await axios.post('http://localhost:1337/api/auth/local/register', formData);
+      setMessage('Signup successful!');
+      console.log('User registered:', res.data);
     } catch (err) {
-      console.error(err);
-      setError("Failed to signup. Please try again.");
+      console.error('Error signing up:', err);
+      setMessage('Signup failed. Please try again.');
     }
   };
 
   return (
     <>
-    <Navbar></Navbar>
-    <div className={styles.container}>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <h2>Sign Up</h2>
-
-        <div className={styles.inputGroup}>
-          <label>Name:</label>
+      <Navbar />
+      <div className={styles.container}>
+        <h2 className={styles.title}>Signup</h2>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <input
             type="text"
-            name="name"
-            placeholder="Enter your name"
-            value={formData.name}
+            name="username"
+            placeholder="Username"
+            value={formData.username}
             onChange={handleChange}
+            className={styles.input}
             required
           />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label>Email:</label>
           <input
             type="email"
             name="email"
-            placeholder="Enter your email"
+            placeholder="Email"
             value={formData.email}
             onChange={handleChange}
+            className={styles.input}
             required
           />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label>Password:</label>
           <input
             type="password"
             name="password"
-            placeholder="Create a password"
+            placeholder="Password"
             value={formData.password}
             onChange={handleChange}
+            className={styles.input}
             required
           />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label>Confirm Password:</label>
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm your password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {error && <p className={styles.error}>{error}</p>}
-        {success && <p className={styles.success}>{success}</p>}
-
-        <button type="submit" className={styles.button}>Sign Up</button>
-
-        <p className={styles.login}>
-          Already have an account? <a href="/login">Login</a>
-        </p>
-      </form>
-    </div>
+          <button type="submit" className={styles.button}>Sign Up</button>
+          <p>already registered <Link to='/login'>Login</Link> </p>
+        </form>
+        {message && <p className={styles.message}>{message}</p>}
+      </div>
     </>
   );
 };

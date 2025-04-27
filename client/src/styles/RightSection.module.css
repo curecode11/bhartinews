@@ -1,0 +1,147 @@
+
+   .container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+    z-index: 1000;
+    width: 100%;
+  }
+  
+  .cont {
+    background-color: white;
+    border: 1px solid brown;
+    height: 70vh;
+    overflow: hidden;
+    position: relative;
+    border-radius: 10px;
+  }
+  
+  .header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.5rem 0;
+    background-color: white;
+    color: maroon;
+    font-weight: bold;
+    text-align: center;
+    /* z-index: 1000; */
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .innercont {
+    margin-top: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: scrollUp 20s linear infinite;
+    padding: 0 1rem;
+  }
+  
+  .innercont:hover {
+    animation-play-state: paused;
+  }
+  
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: white;
+    padding: 0.8rem;
+    border-radius: 5px;
+  }
+  
+  .sectionTitle {
+    background-color: transparent;
+    color: maroon;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0;
+    border-left: 4px solid maroon;
+    padding-left: 0.6rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .Link {
+    text-decoration: none;
+  }
+  
+  .box {
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .title {
+    background-color: transparent;
+    padding: 0;
+  }
+  
+  .headLine {
+    font-size: 1rem;
+    color: maroon;
+    margin: 0;
+    font-weight: 500;
+    background-color: transparent;
+  }
+  
+  .right {
+    background-color: transparent;
+    height: 50vh;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .rightLinks {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    animation: scrollUp 20s linear infinite;
+    padding: 0 1rem;
+  }
+  
+  .rightLinks:hover {
+    animation-play-state: paused;
+  }
+  
+  .likeNewsBox {
+    margin-bottom: 20px;
+    background-color: white;
+    border-radius: 5px;
+    padding: 10px;
+  }
+  
+  .likeNewsLink {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: maroon;
+  }
+  
+  .likeNewsImage {
+    width: 80px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  
+  .likeNewsTitle {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: maroon;
+    background-color: transparent;
+  }
+  
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  

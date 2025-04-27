@@ -23,6 +23,7 @@ const Contact = () => {
   const handlesubmit = async (e) => {
     e.preventDefault();
     const apiUrl = import.meta.env.VITE_CONTACT_URL
+    // console.log(apiUrl)
     try {
       const res = await axios.post(apiUrl, user);
       alert("thanks for connecting")
@@ -35,9 +36,10 @@ const Contact = () => {
   }
   return (
     <>
+    
+      <div className={styles.main}>
       <Navbar />
       <h1 className={styles.heading}>Contact Us</h1>
-      <div className={styles.main}>
         <div action="" className={styles.form}>
           <div className={styles.detail}>
             <label htmlFor="name" className={styles.label}>Name : </label>

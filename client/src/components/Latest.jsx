@@ -1,25 +1,26 @@
-import React, { useEffect } from 'react'
-import Navbar from './Navbar'
-import Footer from './Footer'
-import styles from '../styles/Latest.module.css'
-import { useState } from 'react'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import Navbar from './Navbar';
+import Footer from './Footer';
+import styles from '../styles/Latest.module.css';
+import axios from '../../utils/axios';
+import { useNavigate } from 'react-router-dom';
+import RightSection from './RightSection';
+import { Link } from 'react-router-dom';
 const Latest = () => {
   const [latestNews, setLatestNews] = useState([]);
-  useEffect(() => {
-    try {
-      const getdata = async () => {
-        const news = await axios.get(`https://api.spaceflightnewsapi.net/v4/articles/?limit=10`)
-        setLatestNews(news.data.results)
-        // console.log(dataTopNews.data.results);
-      }
-      getdata();
-    }
-    catch (error) {
-      console.error("error fetching projects", error);
-    }
-  }, [])
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const getdata = async () => {
+      try {
+        const news = await axios.get(`/articles?populate=*&sort=createdAt:desc`);
+        setLatestNews(news.data.data);
+      } catch (error) {
+        console.error("Error fetching articles", error);
+      }
+    };
+    getdata();
+  }, []);
 
   return (
     <>
@@ -28,32 +29,39 @@ const Latest = () => {
         <h1 className={styles.heading}>Latest News</h1>
         <div className={styles.container}>
 
+          {/* Main Articles */}
           <div className={styles.news}>
-            {
-              latestNews.map((top) => (
-                <div className={styles.newsBox} key={top.id}>
-                  <h3 className={styles.newsHeadline}>{top.title}</h3>
-                  <img className={styles.newsImage} src={top.image_url} alt="sdf" />
-                  <p>{top.summary}</p>
-                </div>
-              ))
-            }
+            {latestNews.map((article) => (
+              <div className={styles.newsBox} key={article.id}>
+                <h3 className={styles.newsHeadline}>{article.title}</h3>
+                <img
+                  className={styles.newsImage}
+                  src={`http://localhost:1337${article.media[0].formats.large.url}`}
+                  alt={article.title}
+                />
+                <p className={styles.newsSummary}>
+                  {article.summary?.slice(0, 200)}...
+                </p>
+
+                <Link to={`/${article.slug}`}><button
+                  className={styles.readMoreBtn}
+                >
+                  Read More
+                </button></Link>
+
+              </div>
+            ))}
           </div>
-          <div className={styles.likeNews}>
-            {
-              latestNews.map((top)=>(
-                <div className={styles.likeNewsBox} key={top.id}>
-                  <img className={styles.likeNewsImage} src={top.image_url} alt="" />
-                  <h6>{top.title}</h6>
-                </div>
-              ))
-            }
-          </div>
+
+          {/* Sidebar - Liked/Popular News */}
+          {/* <div>
+            <RightSection />
+          </div> */}
         </div>
       </div>
       <Footer />
     </>
-  )
-}
+  );
+};
 
-export default Latest
+export default Latest;

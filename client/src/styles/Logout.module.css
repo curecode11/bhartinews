@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    width: 100vw;
+    height: 60vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.logoutBtn{
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(maroon,red);
+    color: white;
+    font-weight: 700;
+}

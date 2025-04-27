@@ -1,10 +1,14 @@
 import React from 'react'
 import Navbar from './Navbar'
 import styles from '../styles/About.module.css'
+import Footer from './Footer'
 const About = () => {
   return (
     <>
+    <div className={styles.main}>
+
       <Navbar />
+      <center>
       <div className={styles.container}>
         <h1 className={styles.heading}>About Bharti News</h1>
         <p className={styles.description}>
@@ -29,6 +33,9 @@ const About = () => {
         </p>
       </div>
 
+      </center>
+      <Footer/>
+    </div>
     </>
   )
 }

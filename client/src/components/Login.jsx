@@ -1,86 +1,63 @@
-import { useState } from "react";
-import axios from "axios";
-import styles from "../styles/Login.module.css";
-import Navbar from "./Navbar";
-import { useNavigate } from "react-router-dom";
-
+import React, { useState } from 'react';
+import styles from '../styles/Login.module.css';
+import axios from 'axios';
+import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
 const Login = () => {
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [error, setError] = useState("");
-  const navigate = useNavigate();
-
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [identifier, setIdentifier] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
+    setSuccess('');
+
     try {
-      const res = await axios.post("http://localhost:4000/api/login", formData);
-      if (res.data.success) {
-        navigate("/dashboard");  // Redirect on successful login
-      } else {
-        setError("Invalid email or password");
-      }
+      const response = await axios.post('http://localhost:1337/api/auth/local', {
+        identifier,
+        password,
+      });
+
+      const { jwt, user } = response.data;
+      setSuccess(`Welcome, ${user.username}!`);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      localStorage.setItem('token', jwt); // Save token for future auth use
     } catch (err) {
-      console.error(err);
-      setError("Failed to login. Please try again.");
+      setError('Invalid credentials. Please try again.');
     }
   };
 
   return (
     <>
-    <Navbar/>
+    <Navbar/>  
     <div className={styles.container}>
+      <h2 className={styles.heading}>Login</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <h2>Login</h2>
-
-        <div className={styles.inputGroup}>
-          <label>Email:</label>
-          <input
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleChange}
-            required
+        <input
+          type="text"
+          placeholder="Username or Email"
+          value={identifier}
+          onChange={(e) => setIdentifier(e.target.value)}
+          className={styles.input}
+          required
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={styles.input}
+          required
           />
-        </div>
-
-        <div className={styles.inputGroup}>
-          <label>Password:</label>
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter your password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        <div className={styles.options}>
-          <div>
-            <input type="checkbox" id="remember" />
-            <label htmlFor="remember">Remember Me</label>
-          </div>
-          <a href="/forgot-password" className={styles.forgot}>Forgot Password?</a>
-        </div>
-
-        {error && <p className={styles.error}>{error}</p>}
-
         <button type="submit" className={styles.button}>Login</button>
-
-        <p className={styles.signup}>
-          Don't have an account? <a href="/signup">Sign Up</a>
-        </p>
+        <p>not registered yet!!! <Link to='/signup'>Register</Link> </p>
+        {error && <p className={styles.error}>{error}</p>}
+        {success && <p className={styles.success}>{success}</p>}
       </form>
     </div>
-    </>
+  </>
   );
 };
 

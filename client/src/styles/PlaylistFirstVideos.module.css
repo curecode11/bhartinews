@@ -1,0 +1,47 @@
+.container {
+    padding: 20px;
+    background: #fefefe;
+    min-height: 100vh;
+  }
+  
+  .heading {
+    text-align: center;
+    font-size: 2rem;
+    color: maroon;
+    margin-bottom: 30px;
+  }
+  
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .card {
+    width: 320px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .video {
+    width: 100%;
+    height: 180px;
+    border: none;
+  }
+  
+  .title {
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: maroon;
+    text-align: center;
+  }
+  

@@ -1,0 +1,59 @@
+.container {
+    width: 15vw;
+    height: 60vh;
+    overflow: hidden;
+    background-color: white;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  .heading{
+    color: maroon;
+    font-family: serif;
+    font-size: 35px;
+    font-weight: 700;
+  }
+  .marquee {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    animation: scrollUp 120s linear infinite;
+  }
+  
+  .card {
+    padding: 12px 10px;
+    margin: 5px 0;
+    background-color: transparent;
+    color: maroon;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-bottom: 1px solid rgba(128, 0, 0, 0.1);
+  }
+  
+  .card:hover {
+    background-color: rgba(128, 0, 0, 0.1);
+  }
+  .btnLink{
+    text-decoration: none;
+  }
+  .btn{
+    all: unset;
+    background: var(--primary-bg-color);
+    padding: 1px 10px;
+    color: maroon;
+  }
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+  

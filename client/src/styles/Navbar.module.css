@@ -2,6 +2,53 @@
     margin: 0;
     padding: 0;
 }
+.page{
+    position: sticky;
+    top: 0vh;
+    z-index: 1;
+}
+.brand{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: maroon;
+    background-color: var(--secondary-bg-color);
+}
+.brandText{
+    width: 40%;
+    height: 10vh;
+    border-radius: 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 0px 4px;
+    font-size: 3vh;
+    font-weight: bold ;
+    color: black;
+    transition: box-shadow 1s ease;
+}
+.brandText{
+    width: 50vw;
+    height: 5vh;
+}
+.brandText::spelling-error{
+    background: red;
+}
+.brandTitle{
+    width: 500px;
+}
+.brandText:focus{
+    box-shadow: 5px 5px 10px black;
+}
+.brandText::placeholder{
+    color: maroon;
+}
+.brandImage{
+    width: 150px;
+}
+.brandName{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size:30px;
+}
+
 .main{
     width: fit-content;
     height: fit-content;
@@ -9,9 +56,9 @@
 .linkContainer{
     display: flex;
     flex-wrap: wrap;
-    background-color: maroon;
+    background:var(--head-foot);
     width: 100vw;
-    height: 10vh;
+    height: 6vh;
     justify-content: space-evenly;
     align-items: center;
 
@@ -20,24 +67,64 @@
     list-style: none;
 }
 .link{
-    text-decoration: none;
-    color: white;
+    font-weight: 400;
+    position: relative;
+    color: var(--secondary-bg-color);
+  text-decoration: none;
+  padding-bottom: 2px;
 }
-
+.link::after{
+    content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 0%;
+  background-color: pink;
+  transition: width 0.3s ease-in-out;
+}
+.link:hover::after{
+    width: 100%;
+}
 .mobileNav{
     display: none;
     width: 100vw;
-    background-color: maroon;
+    /* background-color: maroon; */
 }
-/* .menuBtn{
-    color: white;
-    background-color: maroon;
-} */
+.menuBtn{
+    color: maroon;
+    /* background-color: maroon; */
+}
 @media(max-width:768px){
     .main{
         display: none ;
     }
+    .brand{
+        display: none;
+    }
     .mobileNav{
-        display: block;
+        display: flex;
+        justify-content: space-between;
     }
 }
+
+.mobileLi{
+    text-decoration: none;
+    background: linear-gradient(to right,maroon,red);
+    padding: 10px;
+}
+.mobilebrandImage{
+    height: 80px;
+}
+.mobileLink{
+    text-decoration: none;
+    color: white;
+    /* background: linear-gradient(to right,red,maroon); */
+    border-radius: 5px;
+    padding: 5px;
+}
+.mobileUl {
+    max-height: 50vh;        /* Set the height you want */
+    overflow-y: auto;         /* Enable vertical scrolling */
+    overflow-x: hidden;       /* Prevent horizontal scroll */
+  }

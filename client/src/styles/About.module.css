@@ -1,16 +1,24 @@
+.main{
+  background-color: var(--primary-bg-color);
+  width: 100vw;
+}
 .container {
-    max-width: 800px;
-    margin: auto;
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    color: #333;
-  }
-  
+  width: 70vw;
+  margin-top: -20px ;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: white;
+
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+              url('/newspaper.jpg') center/cover no-repeat;
+  background-attachment: fixed; /* optional: gives nice parallax feel */
+}
   .heading {
     font-size: 2rem;
-    color: #d32f2f;
+    color: white;
     text-align: center;
     margin-bottom: 20px;
+
   }
   
   .description {
@@ -21,7 +29,7 @@
   
   .subheading {
     font-size: 1.5rem;
-    color: #1976d2;
+    color: white;
     margin-top: 20px;
   }
   
@@ -32,7 +40,7 @@
   
   .list {
     padding-left: 20px;
-    list-style-type: disc;
+    list-style: none;
   }
   
   .listItem {
