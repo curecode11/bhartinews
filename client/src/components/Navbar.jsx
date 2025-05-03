@@ -10,11 +10,12 @@ const Navbar = () => {
   const [menuItems, setMenuItems] = useState([]);
   const navigate = useNavigate();
   const token = localStorage.getItem('token');
+  const CMS_API=import.meta.env.VITE_CMS_API;
   useEffect(() => {
 
     try {
       const getMenu = async () => {
-        const response = await axios.get('http://localhost:1337/api/leftmenus?populate=*')
+        const response = await axios.get(`${CMS_API}/api/leftmenus?populate=*`)
         setMenuItems(response.data.data);
       }
       getMenu();

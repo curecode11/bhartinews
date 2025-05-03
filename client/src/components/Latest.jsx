@@ -36,7 +36,7 @@ const Latest = () => {
                 <h3 className={styles.newsHeadline}>{article.title}</h3>
                 <img
                   className={styles.newsImage}
-                  src={`http://localhost:1337${article.media[0].formats.large.url}`}
+                  src={`http://localhost:1337${article.media[0].url}`}
                   alt={article.title}
                 />
                 <p className={styles.newsSummary}>

@@ -10,11 +10,12 @@ const NewsList = () => {
     const { newscategory, type } = useParams();
     // console.log(type)
     const [articles, setArticles] = useState([]);
+    const CMS_API=import.meta.env.VITE_CMS_API;
     useEffect(() => {
         const getNews = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:1337/api/${newscategory}?filters[slug][$eq]=${type}&populate[articles][populate]=media`
+                    `${CMS_API}/api/${newscategory}?filters[slug][$eq]=${type}&populate[articles][populate]=media`
                 );
 
                 const fetchedArticles = response.data.data[0]?.articles || [];
@@ -44,7 +45,7 @@ const NewsList = () => {
                         articles.map((item) => (
                             <div className={styles.newsBox} key={item.id}>
                                 <h3 className={styles.newsHeadline}>{item.title}</h3>
-                                <img className={styles.newsImage} src={`http://localhost:1337${item.media[0].formats.medium.url}`} alt="News" />
+                                <img className={styles.newsImage} src={`http://localhost:1337${item.media[0].url}`} alt="News" />
                                 <p className={styles.date}>
                                     Published On: {new Date(item.createdAt).toLocaleDateString('en-GB', {
                                         day: '2-digit',

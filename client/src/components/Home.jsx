@@ -20,11 +20,11 @@ const Home = () => {
   const [menuItems, setMenuItems] = useState([]);
   const API_KEY = import.meta.env.VITE_YT_API_KEY;
   const CHANNEL_ID = import.meta.env.VITE_YT_CHANNEL_ID;
-
+  const CMS_API=import.meta.env.VITE_CMS_API;
   useEffect(() => {
     try {
       const getdata = async () => {
-        const dataTopNews = await axios.get(`http://localhost:1337/api/articles?populate=*&sort=createdAt:desc`)
+        const dataTopNews = await axios.get(`${CMS_API}/api/articles?populate=*&sort=createdAt:desc`)
         // console.log(dataTopNews.data.data)
         setTopNews(dataTopNews.data.data)
         // console.log(topNews[0]);
@@ -37,14 +37,14 @@ const Home = () => {
         setVideos(response.data.items);
       }
       const getCategories = async () => {
-        const response = await axios.get('http://localhost:1337/api/categories?populate=*&sort=createdAt:desc')
+        const response = await axios.get(`${CMS_API}/api/categories?populate=*&sort=createdAt:desc`)
         // console.log(response.data.data)
         setCategories(response.data.data)
       }
       const getNews = async () => {
-        const breaking = await axios.get('http://localhost:1337/api/breakingstories?populate=*&sort=createdAt:desc')
+        const breaking = await axios.get(`${CMS_API}/api/breakingstories?populate=*&sort=createdAt:desc`)
         setBreakingNews(breaking.data.data)
-        console.log(breaking.data.data[0])
+        // console.log(breaking.data.data[0])
       }
       // const getMenu = async () => {
       //   const response = await axios.get('http://localhost:1337/api/leftmenus?populate=*')
@@ -95,8 +95,6 @@ const Home = () => {
           </div>
           <div className={styles.mid}>
             <div className={styles.hotTopic}>
-              {/* <li className={styles.hotLink}>Delhi Election</li>
-              <li className={styles.hotLink}>MahaKumbh</li> */}
               {
                 categories.map((item) => (
                   <div key={item.id}>
@@ -128,15 +126,14 @@ const Home = () => {
                   <span className="visually-hidden">Next</span>
                 </button>
               </div>
-
             </div>
 
             <ul className={styles.midLinks}>
               {
-                topNews.slice(0, 2).map((top) => (  // ← show only first two news items
+                topNews.slice(0, 2).map((top) => (  
                   <div className={styles.newsBox} key={top.id}>
                     <h3 className={styles.newsHeadline}>{top.title}</h3>
-                    <img className={styles.newsImage} src={`http://localhost:1337${top?.media[0]?.formats.large.url}`} alt="sdf" />
+                    <img className={styles.newsImage} src={`${CMS_API}${top?.media[0]?.url}`} alt="sdf" />
                     <div className={styles.likeAndMore}>
                       <Link to={`/${top.slug}`} className={styles.readMore}>Read more</Link>
                     </div>
@@ -148,28 +145,6 @@ const Home = () => {
           </div>
           <div className={styles.right}>
             <RightSection />
-            {/* {
-                videos.map((video) => (
-                  <div key={video.id.videoId} className={styles.likeNewsBox}>
-                    <a
-                    className={styles.likeNewsLink}
-                      href={`https://www.youtube.com/watch?v=${video.id.videoId}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      >
-                      <img
-                      src={video.snippet.thumbnails.high.url}
-                      alt={video.snippet.title}
-                      className={styles.likeNewsImage}
-                      />
-                      <div className={styles.likeNewsTitle}>
-                        <h2 className={styles.likeNewsTitle}>{video.snippet.title}</h2>
-                      </div>
-                    </a>
-                  </div>
-                ))
-              } */}
-            {/* </ul> */}
           </div>
         </div>
       </div >

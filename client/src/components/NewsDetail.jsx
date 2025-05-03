@@ -10,16 +10,17 @@ import AutoPlaylistSlider from './AutoPlaylistSlider'
 const NewsDetail = () => {
     const { slug } = useParams();
     const [article, setArticle] = useState(null);
-
+    const CMS_API=import.meta.env.VITE_CMS_API;
+    console.log(CMS_API)
     useEffect(() => {
         const fetchArticle = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:1337/api/articles?filters[slug][$eq]=${slug}&populate=*`
+                    `${CMS_API}/api/articles?filters[slug][$eq]=${slug}&populate=*`
                 );
 
                 setArticle(res.data.data[0]);
-                console.log(article)
+                console.log(res.data.data[0])
             } catch (err) {
                 console.error("Error fetching article:", err);
             }
@@ -55,10 +56,10 @@ const NewsDetail = () => {
                         <h1 className={styles.newsHeadline}>{article.title}</h1>
 
                         {/* Image */}
-                        {article.media?.[0]?.formats?.large?.url && (
+                        {article.media?.[0]?.url && (
                             <img
                                 className={styles.newsImage}
-                                src={`http://localhost:1337${article.media[0].formats.large.url}`}
+                                src={`${CMS_API}${article.media[0].url}`}
                                 alt={article.title}
                             />
                         )}
