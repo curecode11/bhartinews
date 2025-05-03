@@ -42,7 +42,7 @@ const SearchBar = () => {
         type="text"
         value={query}
         onChange={handleInputChange}
-        placeholder="Search articles..."
+        placeholder="🔍Search articles..."
         className={styles.brandText}
       />
 

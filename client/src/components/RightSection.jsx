@@ -13,10 +13,10 @@ const RightSection = () => {
                 const top50Res = await axios.get('http://localhost:1337/api/top50s?populate=articles');
                 setTopSections(top50Res.data.data || []);
 
-                const ytRes = await axios.get(
-                    `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`
-                );
-                setVideos(ytRes.data.items);
+                // const ytRes = await axios.get(
+                //     `https://www.googleapis.com/youtube/v3/search?key=${API_KEY}&channelId=${CHANNEL_ID}&part=snippet,id&order=date&maxResults=10`
+                // );
+                // setVideos(ytRes.data.items);
             } catch (error) {
                 console.error("Error fetching data:", error);
             }

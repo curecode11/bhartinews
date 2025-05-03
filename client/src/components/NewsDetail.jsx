@@ -74,11 +74,6 @@ const NewsDetail = () => {
                             ))}
                         </div>
 
-                        {/* Like Section */}
-                        <div className={styles.likeSection}>
-                            <p>{article.likes || 0} Likes</p>
-                            <button className={styles.likeBtn}>Like</button>
-                        </div>
                     </div>
                     <div className={styles.left}>
                         <RightSection />

@@ -11,6 +11,7 @@ import SearchBar from './SearchBar'
 import RightSection from './RightSection'
 import PlaylistMarquee from './PlaylistMarquee'
 import AutoPlaylistSlider from './AutoPlaylistSlider'
+import CurrentDate from './CurrentDate'
 const Home = () => {
   const [videos, setVideos] = useState([]);
   const [topNews, setTopNews] = useState([]);
@@ -67,6 +68,11 @@ const Home = () => {
     <>
       <div className={styles.main}>
         <Navbar />
+        
+                <div className={styles.search}>
+                  <CurrentDate/>
+                  <SearchBar/>
+                </div>
         <div className={styles.breaking}>
           <div className={styles.breakingDesc}>Breaking News</div>
           <marquee className={styles.breakingSection} behavior="" direction="" >
@@ -88,7 +94,6 @@ const Home = () => {
             <PlaylistMarquee />
           </div>
           <div className={styles.mid}>
-            <SearchBar />
             <div className={styles.hotTopic}>
               {/* <li className={styles.hotLink}>Delhi Election</li>
               <li className={styles.hotLink}>MahaKumbh</li> */}
@@ -104,35 +109,15 @@ const Home = () => {
               <div id="carouselExample" className="carousel slide">
                 <div className="carousel-inner">
                   <div className="carousel-item active">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider1.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                    <img src="/bharatiNetwork.png" className={`d-block w-100 ${styles.cItem}`} alt="..." />
                   </div>
                   <div className="carousel-item active">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider2.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                    <img src="/bharatiNetwork.png" className={`d-block w-100 ${styles.cItem}`} alt="..." />
                   </div>
-                  <div className="carousel-item">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider3.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
+                  <div className="carousel-item active">
+                    <img src="/bharatiNetwork.png" className={`d-block w-100 ${styles.cItem}`} alt="..." />
                   </div>
-                  <div className="carousel-item">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider4.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
-                  </div>
-                  <div className="carousel-item">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider5.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
-                  </div>
-                  <div className="carousel-item">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider6.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
-                  </div>
-                  <div className="carousel-item">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider7.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
-                  </div>
-                  <div className="carousel-item">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider8.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
-                  </div>
-                  <div className="carousel-item">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider9.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
-                  </div>
-                  <div className="carousel-item">
-                    <img src="http://bvicam.in/Content/ForntEnd/images/Slider10.jpg" className={`d-block w-100 ${styles.cItem}`} alt="..." />
-                  </div>
+                  
                 </div>
                 <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
                   <span className="carousel-control-prev-icon" aria-hidden="true" />
@@ -151,7 +136,7 @@ const Home = () => {
                 topNews.slice(0, 2).map((top) => (  // ← show only first two news items
                   <div className={styles.newsBox} key={top.id}>
                     <h3 className={styles.newsHeadline}>{top.title}</h3>
-                    <img className={styles.newsImage} src={`http://localhost:1337${top.media[0].formats.large.url}`} alt="sdf" />
+                    <img className={styles.newsImage} src={`http://localhost:1337${top?.media[0]?.formats.large.url}`} alt="sdf" />
                     <div className={styles.likeAndMore}>
                       <Link to={`/${top.slug}`} className={styles.readMore}>Read more</Link>
                     </div>
@@ -159,7 +144,7 @@ const Home = () => {
                 ))
               }
             </ul>
-            <Link to='latest'><center>Load More</center></Link>
+            <Link to='latest' className={styles.latest}><center>Go To Latest</center></Link>
           </div>
           <div className={styles.right}>
             <RightSection />

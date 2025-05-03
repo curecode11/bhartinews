@@ -1,21 +1,15 @@
 .brandText {
     all: unset;
-    width: 40%;
-    height: 10vh;
+    width: 20vw;
+    height: 4vh;
     border: 1px solid black;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 0px 4px;
-    font-size: 3vh;
+    font-size: 2vh;
     font-weight: bold;
     color: black;
     transition: box-shadow 1s ease;
     background:white ;
-}
-
-.brandText {
-    width: 100%;
-    height: 7vh;
-    margin-bottom: 20px;
 }
 
 .brandText::spelling-error {

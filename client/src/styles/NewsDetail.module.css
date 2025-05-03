@@ -4,11 +4,14 @@
     padding: 20px;
     background-color: #f9f9f9;
   }
-  
+  .container{
+    display: flex;
+  }  
   .left {
-    flex: 2;
-    min-width: 20vw;
-    margin-right: 20px;
+    flex: 1;
+    max-width: 20vw;
+    width: 40vw;
+    /* margin-right: 20px; */
     position: sticky;
     top: 12vw; 
     align-self: flex-start;

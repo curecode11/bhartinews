@@ -334,7 +334,12 @@ marquee{
     flex: 2;
     min-width: 300px;
   }
-  
+  .latest{
+    color: maroon;
+  }
+  .latest:hover{
+    color: gray;
+  }
   .right {
     flex: 1;
     min-width: 250px;
@@ -352,3 +357,13 @@ marquee{
     }
   }
   
+
+  
+.search {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px;
+}
