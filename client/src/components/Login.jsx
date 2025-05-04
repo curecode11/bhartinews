@@ -8,14 +8,14 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-
+  const CMS_API=import.meta.env.VITE_CMS_API;
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
 
     try {
-      const response = await axios.post('http://localhost:1337/api/auth/local', {
+      const response = await axios.post(`${CMS_API}/api/auth/local`, {
         identifier,
         password,
       });

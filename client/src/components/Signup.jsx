@@ -11,7 +11,7 @@ const Signup = () => {
   });
 
   const [message, setMessage] = useState('');
-
+  const CMS_API=import.meta.env.VITE_CMS_API;
   const handleChange = (e) => {
     setFormData(prev => ({
       ...prev,
@@ -22,7 +22,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:1337/api/auth/local/register', formData);
+      const res = await axios.post(`${CMS_API}/api/auth/local/register`, formData);
       setMessage('Signup successful!');
       console.log('User registered:', res.data);
     } catch (err) {
