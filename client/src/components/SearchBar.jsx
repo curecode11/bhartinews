@@ -6,7 +6,7 @@ const SearchBar = () => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const timeoutRef = useRef(null);
-
+  const CMS_API=import.meta.env.VITE_CMS_API;
   const handleInputChange = (e) => {
     const value = e.target.value;
     setQuery(value);
@@ -28,7 +28,7 @@ const SearchBar = () => {
 
   const searchArticles = async (term) => {
     try {
-      const res = await axios.get(`http://localhost:1337/api/articles?filters[title][$containsi]=${term}&pagination[limit]=2`);
+      const res = await axios.get(`${CMS_API}/api/articles?filters[title][$containsi]=${term}&pagination[limit]=2`);
     //   console.log(res.data.data)
       setResults(res.data.data);
     } catch (err) {

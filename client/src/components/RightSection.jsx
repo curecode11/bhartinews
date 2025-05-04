@@ -6,11 +6,12 @@ const RightSection = () => {
     const [topSections, setTopSections] = useState([]);
     const [videos, setVideos] = useState([]);
     const API_KEY = import.meta.env.VITE_YT_API_KEY;
-  const CHANNEL_ID = import.meta.env.VITE_YT_CHANNEL_ID
+    const CHANNEL_ID = import.meta.env.VITE_YT_CHANNEL_ID;
+    const CMS_API = import.meta.env.VITE_CMS_API;
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const top50Res = await axios.get('http://localhost:1337/api/top50s?populate=articles');
+                const top50Res = await axios.get(`${CMS_API}/api/top50s?populate=articles`);
                 setTopSections(top50Res.data.data || []);
 
                 // const ytRes = await axios.get(

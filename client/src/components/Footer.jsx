@@ -1,7 +1,9 @@
 import React from 'react'
 import styles from '../styles/Footer.module.css'
 import { Link } from 'react-router-dom'
+
 const Footer = () => {
+  const CMS_API=import.meta.env.VITE_CMS_API
   return (
     <>
       <div className={styles.main}>
@@ -20,7 +22,7 @@ const Footer = () => {
               <Link to='/contact' className={styles.midLink}><a className={styles.midLink} href="">Contact Us</a></Link>
               <Link to='/about' className={styles.midLink}><a className={styles.midLink} href="">About Us</a></Link>
               <a className={styles.midLink} href="http://bvicam.in/Home/NIRF">NIRF Data</a>
-              <a className={styles.midLink} href="http://localhost:1337/admin/">Admin Login</a>
+              <a className={styles.midLink} href={`${CMS_API}/admin/`}>Admin Login</a>
               <a className={styles.midLink} href="http://www.ipu.ac.in/">GGSIPU</a>
               
             </ul>

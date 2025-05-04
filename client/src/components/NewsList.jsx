@@ -45,7 +45,7 @@ const NewsList = () => {
                         articles.map((item) => (
                             <div className={styles.newsBox} key={item.id}>
                                 <h3 className={styles.newsHeadline}>{item.title}</h3>
-                                <img className={styles.newsImage} src={`http://localhost:1337${item.media[0].url}`} alt="News" />
+                                <img className={styles.newsImage} src={`${CMS_API}${item.media[0].url}`} alt="News" />
                                 <p className={styles.date}>
                                     Published On: {new Date(item.createdAt).toLocaleDateString('en-GB', {
                                         day: '2-digit',

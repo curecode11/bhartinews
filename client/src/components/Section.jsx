@@ -3,12 +3,14 @@ import styles from '../styles/Section.module.css'
 import axios from 'axios';
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 const Section = () => {
   const [cards, setCards] = useState([]);
+  const CMS_API=import.meta.env.VITE_CMS_API;
   useEffect(() => {
     try {
       const getCards = async () => {
-        const response = await axios.get("http://localhost:1337/api/cards?populate[articles][populate]=*");
+        const response = await axios.get(`${CMS_API}/api/cards?populate[articles][populate]=*`);
         // console.log(response.data.data[0].articles)
         setCards(response.data.data)
       }
