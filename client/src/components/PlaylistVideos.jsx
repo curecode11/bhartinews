@@ -12,11 +12,11 @@ const PlaylistVideos = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        // const res = await fetch(
-        //   `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${id}&maxResults=50&key=${API_KEY}`
-        // );
-        // const data = await res.json();
-        // setVideos(data.items || []);
+        const res = await fetch(
+          `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${id}&maxResults=50&key=${API_KEY}`
+        );
+        const data = await res.json();
+        setVideos(data.items || []);
       } catch (err) {
         console.error('Failed to load videos:', err);
       }

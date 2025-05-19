@@ -11,28 +11,28 @@ const AutoPlaylistSlider = () => {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        // const playlistRes = await fetch(
-        //   `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${CHANNEL_ID}&maxResults=25&key=${API_KEY}`
-        // );
-        // const playlistData = await playlistRes.json();
+        const playlistRes = await fetch(
+          `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${CHANNEL_ID}&maxResults=25&key=${API_KEY}`
+        );
+        const playlistData = await playlistRes.json();
 
-        // const playlistItems = await Promise.all(
-        //   (playlistData.items || []).map(async (playlist) => {
-        //     const res = await fetch(
-        //       `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${playlist.id}&key=${API_KEY}`
-        //     );
-        //     const data = await res.json();
-        //     const first = data.items?.[0]?.snippet;
-        //     return first?.resourceId?.videoId
-        //       ? {
-        //           title: playlist.snippet.title,
-        //           videoId: first.resourceId.videoId,
-        //         }
-        //       : null;
-        //   })
-        // );
+        const playlistItems = await Promise.all(
+          (playlistData.items || []).map(async (playlist) => {
+            const res = await fetch(
+              `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=1&playlistId=${playlist.id}&key=${API_KEY}`
+            );
+            const data = await res.json();
+            const first = data.items?.[0]?.snippet;
+            return first?.resourceId?.videoId
+              ? {
+                  title: playlist.snippet.title,
+                  videoId: first.resourceId.videoId,
+                }
+              : null;
+          })
+        );
 
-        // setVideos(playlistItems.filter(Boolean));
+        setVideos(playlistItems.filter(Boolean));
       } catch (err) {
         console.error('Error loading videos:', err);
       }

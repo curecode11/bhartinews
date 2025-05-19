@@ -12,11 +12,11 @@ const PlaylistMarquee = () => {
   useEffect(() => {
     const fetchPlaylists = async () => {
       try {
-        // const res = await fetch(
-        //   `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${CHANNEL_ID}&maxResults=50&key=${API_KEY}`
-        // );
-        // const data = await res.json();
-        // setPlaylists(data.items || []);
+        const res = await fetch(
+          `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${CHANNEL_ID}&maxResults=50&key=${API_KEY}`
+        );
+        const data = await res.json();
+        setPlaylists(data.items || []);
       } catch (error) {
         console.error('Error fetching playlists:', error);
       }
